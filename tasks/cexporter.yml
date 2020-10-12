@@ -1,0 +1,13 @@
+---
+- name: cExporter Docker Container
+  docker_container:
+    name: cexporter
+    image: cheerlesscloud/cexporter:1.1.0
+    pull: true
+    ports:
+      - "{{ cexporter_port }}:9167"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: "false"

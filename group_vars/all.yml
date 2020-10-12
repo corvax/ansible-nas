@@ -937,3 +937,8 @@ alertmanagerbot_telegram_token: "ABCDEF"
 cadvisor_available_externally: "false"
 cadvisor_port: 10082
 
+###
+### cExporter
+###
+cexporter_port: 9167
+

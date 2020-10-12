@@ -267,3 +267,7 @@
   - import_tasks: tasks/cadvisor.yml
     when: (cadvisor_enabled | default(False))
     tags: cadvisor
+
+  - import_tasks: tasks/cexporter.yml
+    when: (cexporter_enabled | default(False))
+    tags: cexporter
