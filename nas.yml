@@ -251,3 +251,7 @@
   - import_tasks: tasks/pytivo.yml
     when: (pytivo_enabled | default(False))
     tags: pytivo
+
+  - import_tasks: tasks/prometheus.yml
+     when: (prometheus_enabled | default(False))
+     tags: prometheus

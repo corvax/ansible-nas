@@ -906,3 +906,10 @@ vd_users:
     password: "topsecret"
     sudo: "Y"
 vd_rdp_port: 3389
+
+###
+### Prometheus
+###
+prometheus_available_externally: "false"
+prometheus_data_directory: "{{ docker_home }}/prometheus"
+prometheus_port: 10090

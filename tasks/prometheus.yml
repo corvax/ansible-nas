@@ -1,0 +1,28 @@
+---
+- name: Create Prometheus Directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ prometheus_data_directory }}"
+
+- name: Copy Prometheus config file
+  template:
+    src: prometheus/prometheus.yml
+    dest: "{{ prometheus_data_directory }}/prometheus.yml"
+
+- name: Prometheus Docker Container
+  docker_container:
+    name: prometheus
+    image: prom/prometheus
+    pull: true
+    ports:
+      - "{{ prometheus_port }}:9090"
+    volumes:
+      - "{{ prometheus_data_directory }}/prometheus.yml:/etc/prometheus/prometheus.yml:rw"
+    restart_policy: unless-stopped
+    labels:
+      traefik.backend: "prometheus"
+      traefik.frontend.rule: "Host:prometheus.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ prometheus_available_externally }}"
+      traefik.port: "9090"
