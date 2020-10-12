@@ -4,7 +4,13 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "{{ alertmanager_data_directory }}"
+    - "{{ alertmanager_data_directory }}/data"
+    - "{{ alertmanager_data_directory }}/conf"
+
+- name: Copy Alertmanager config file
+  template:
+    src: alertmanager/config.yml
+    dest: "{{ alertmanager_data_directory }}/conf/config.yml"
 
 - name: Alertmanager Docker Container
   docker_container:
@@ -14,7 +20,8 @@
     ports:
       - "{{ alertmanager_port }}:9093"
     volumes:
-      - "{{ alertmanager_data_directory }}:/opt/bitnami/data:rw"
+      - "{{ alertmanager_data_directory }}/data:/opt/bitnami/data:rw"
+      - "{{ alertmanager_data_directory }}/conf/config.yml:/opt/bitnami/alertmanager/conf/config.yml:rw"
     restart_policy: unless-stopped
     labels:
       traefik.backend: "alertmanager"

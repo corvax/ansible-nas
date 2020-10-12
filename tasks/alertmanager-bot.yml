@@ -1,0 +1,27 @@
+---
+- name: Create Alertmanager Bot Directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ alertmanagerbot_data_directory }}"
+
+- name: Alertmanager Bot Docker Container
+  docker_container:
+    name: alertmanager-bot
+    image: metalmatze/alertmanager-bot:0.4.2
+    pull: true
+    ports:
+      - "{{ alertmanagerbot_port }}: 8080"
+    env:
+      ALERTMANAGER_URL: "http://192.168.20.118:{{ alertmanager_port }}"
+      BOLT_PATH: "/data/bot.db"
+      LISTEN_ADDR: "{{ alertmanagerbot_listen_address }}"
+      STORE: "bolt"
+      TELEGRAM_ADMIN: "{{ alertmanagerbot_telegram_admin }}"
+      TELEGRAM_TOKEN: "{{ alertmanagerbot_telegram_token }}"
+    volumes:
+      - "{{ alertmanager_data_directory }}:/data:rw"
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: "false"

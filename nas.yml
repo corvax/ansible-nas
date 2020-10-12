@@ -259,3 +259,7 @@
   - import_tasks: tasks/alertmanager.yml
     when: (alertmanager_enabled | default(False))
     tags: alertmanager
+
+  - import_tasks: tasks/alertmanager-bot.yml
+     when: (alertmanagerbot_enabled | default(False))
+     tags: alertmanagerbot

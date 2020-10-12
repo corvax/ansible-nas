@@ -920,3 +920,13 @@ prometheus_port: 10090
 alertmanager_available_externally: "false"
 alertmanager_data_directory: "{{ docker_home }}/alertmanager"
 alertmanager_port: 10093
+
+###
+### Alertmanager bot
+###
+alertmanagerbot_available_externally: "false"
+alertmanagerbot_data_directory: "{{ docker_home }}/alertmanagerbot"
+alertmanagerbot_listen_address: "0.0.0.0:8080"
+alertmanagerbot_port: 10098
+alertmanagerbot_telegram_admin: "12345678"
+alertmanagerbot_telegram_token: "ABCDEF"
