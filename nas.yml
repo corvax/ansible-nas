@@ -271,3 +271,7 @@
   - import_tasks: tasks/cexporter.yml
     when: (cexporter_enabled | default(False))
     tags: cexporter
+
+  - import_tasks: tasks/qbittorrent.yml
+    when: (qbittorrent_enabled | default(False))
+    tags: qbittorrent

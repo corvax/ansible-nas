@@ -1,0 +1,33 @@
+---
+- name: Create qBittorrent Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ qbittorrent_config_directory }}"
+    - "{{ qbittorrent_download_directory }}"
+
+- name: qBittorrent Docker Container
+  docker_container:
+    name: qbittorrent
+    image: linuxserver/qbittorrent
+    pull: true
+    volumes:
+      - "{{ qbittorrent_download_directory }}:/downloads:rw"
+      - "{{ qbittorrent_config_directory }}:/config:rw"
+    ports:
+      - "{{ qbittorrent_port_http }}:{{ qbittorrent_port_http }}"
+      - "{{ qbittorrent_port_bt }}:6881"
+      - "{{ qbittorrent_port_bt }}:6881/udp"
+    env:
+      TZ: "{{ ansible_nas_timezone }}"
+      UID: "{{ qbittorrent_user_id }}"
+      GID: "{{ qbittorrent_group_id }}"
+      UMASK_SET: "022"
+      WEBUI_PORT: "{{ qbittorrent_port_http }}"
+    restart_policy: unless-stopped
+    labels:
+      traefik.backend: "qbittorrent"
+      traefik.frontend.rule: "Host:qbittorrent.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ qbittorrent_available_externally }}"
+      traefik.port: "{{ qbittorrent_port_http }}"

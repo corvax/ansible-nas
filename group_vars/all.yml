@@ -946,3 +946,13 @@ cadvisor_port: 10082
 ###
 cexporter_port: 9167
 
+###
+### qBittorrent
+###
+qbittorrent_available_externally: "false"
+qbittorrent_config_directory: "{{ docker_home }}/qbittorrent/config"
+qbittorrent_download_directory: "{{ downloads_root }}"
+qbittorrent_port_http: "10088"
+qbittorrent_port_bt: "6881"
+qbittorrent_user_id: "0"
+qbittorrent_group_id: "0"
