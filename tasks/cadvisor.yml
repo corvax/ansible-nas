@@ -1,0 +1,23 @@
+---
+- name: cAdvisor Docker Container
+  docker_container:
+    name: cadvisor
+    image: gcr.io/cadvisor/cadvisor:v0.36.0
+    pull: true
+    ports:
+      - "{{ cadvisor_port }}:8080"
+    privileged: true
+    devices:
+      - "/dev/kmsg:/dev/kmsg:ro"
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:ro"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
+    restart_policy: unless-stopped
+    labels:
+      traefik.backend: "cadvisor"
+      traefik.frontend.rule: "Host:cadvisor.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ cadvisor_available_externally }}"
+      traefik.port: "8080"

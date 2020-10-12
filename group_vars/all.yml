@@ -930,3 +930,10 @@ alertmanagerbot_listen_address: "0.0.0.0:8080"
 alertmanagerbot_port: 10098
 alertmanagerbot_telegram_admin: "12345678"
 alertmanagerbot_telegram_token: "ABCDEF"
+
+###
+### cAdvisor
+###
+cadvisor_available_externally: "false"
+cadvisor_port: 10082
+

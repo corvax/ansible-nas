@@ -263,3 +263,7 @@
   - import_tasks: tasks/alertmanager-bot.yml
      when: (alertmanagerbot_enabled | default(False))
      tags: alertmanagerbot
+
+  - import_tasks: tasks/cadvisor.yml
+    when: (cadvisor_enabled | default(False))
+    tags: cadvisor
