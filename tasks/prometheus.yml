@@ -12,6 +12,7 @@
     dest: "{{ prometheus_data_directory }}/prometheus.yml"
 
 - name: Copy Prometheus alert rules
+  when: (alertmanager_enabled | default(False)) and (prometheusnode_enabled | default(False))
   template:
     src: prometheus/alert.rules.yml
     dest: "{{ prometheus_data_directory }}/alert.rules.yml"

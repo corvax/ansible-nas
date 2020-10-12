@@ -914,6 +914,10 @@ prometheus_available_externally: "false"
 prometheus_data_directory: "{{ docker_home }}/prometheus"
 prometheus_port: 10090
 
+# if prometheus node exporter is running on the host
+# set prometheus to scrape it by setting prometheusnode_enabled: true
+prometheusnode_port: 9100
+
 ###
 ### Alertmanager
 ###

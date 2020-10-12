@@ -2,7 +2,7 @@ groups:
 - name: "Hardware"
   rules:
   - alert: Node down
-    expr: up{job="nas"} == 0
+    expr: up{job="{{ ansible_nas_hostname }}"} == 0
     for: 3m
     labels:
       severity: warning

@@ -7,15 +7,34 @@ scrape_configs:
     static_configs:
     - targets: ['localhost:9090']
 
-  - job_name: 'nas'
+{% if (prometheusnode_enabled | default(False)) %}
+  - job_name: '{{ ansible_nas_hostname }}'
     static_configs:
-    - targets: ['192.168.20.118:9100']
+    - targets: ['{{ ansible_nas_ip }}:{{ prometheusnode_port }}']
 
+{% endif %}
+{% if (cadvisor_enabled | default(False)) %}
+  - job_name: cadvisor
+    scrape_interval: 10s
+    static_configs:
+    - targets: ['{{ ansible_nas_ip }}:{{ cadvisor_port }}']
+
+{% endif %}
+{% if (cexporter_enabled | default(False)) %}
+  - job_name: 'cexporter'
+    static_configs:
+    - targets: ['{{ ansible_nas_ip }}:{{ cexporter_port }}']
+
+{% endif %}
+{% if (alertmanager_enabled | default(False)) %}
+{% if (prometheusnode_enabled | default(False)) %}
 rule_files:
   - "alert.rules.yml"
 
+{% endif %}
 alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - 192.168.20.118:10093
+      - {{ ansible_nas_ip }}:{{ alertmanager_port }}
+{% endif %}
