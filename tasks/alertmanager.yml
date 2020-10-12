@@ -5,23 +5,22 @@
     state: directory
   with_items:
     - "{{ alertmanager_data_directory }}/data"
-    - "{{ alertmanager_data_directory }}/conf"
 
 - name: Copy Alertmanager config file
   template:
-    src: alertmanager/config.yml
-    dest: "{{ alertmanager_data_directory }}/conf/config.yml"
+    src: alertmanager/alertmanager.yml
+    dest: "{{ alertmanager_data_directory }}/alertmanager.yml"
 
 - name: Alertmanager Docker Container
   docker_container:
     name: alertmanager
-    image: bitnami/alertmanager
+    image: quay.io/prometheus/alertmanager
     pull: true
     ports:
       - "{{ alertmanager_port }}:9093"
     volumes:
-      - "{{ alertmanager_data_directory }}/data:/opt/bitnami/data:rw"
-      - "{{ alertmanager_data_directory }}/conf/config.yml:/opt/bitnami/alertmanager/conf/config.yml:rw"
+      - "{{ alertmanager_data_directory }}/data:/alertmanager:rw"
+      - "{{ alertmanager_data_directory }}/alertmanager.yml:/etc/alertmanager/alertmanager.yml:rw"
     restart_policy: unless-stopped
     labels:
       traefik.backend: "alertmanager"
