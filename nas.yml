@@ -255,3 +255,7 @@
   - import_tasks: tasks/prometheus.yml
      when: (prometheus_enabled | default(False))
      tags: prometheus
+
+  - import_tasks: tasks/alertmanager.yml
+    when: (alertmanager_enabled | default(False))
+    tags: alertmanager

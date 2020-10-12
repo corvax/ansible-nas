@@ -1,0 +1,23 @@
+---
+- name: Create Alertmanager Directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ alertmanager_data_directory }}"
+
+- name: Alertmanager Docker Container
+  docker_container:
+    name: alertmanager
+    image: bitnami/alertmanager
+    pull: true
+    ports:
+      - "{{ alertmanager_port }}:9093"
+    volumes:
+      - "{{ alertmanager_data_directory }}:/opt/bitnami/data:rw"
+    restart_policy: unless-stopped
+    labels:
+      traefik.backend: "alertmanager"
+      traefik.frontend.rule: "Host:alertmanager.{{ ansible_nas_domain }}"
+      traefik.enable: "{{ alertmanager_available_externally }}"
+      traefik.port: "9093"

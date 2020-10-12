@@ -913,3 +913,10 @@ vd_rdp_port: 3389
 prometheus_available_externally: "false"
 prometheus_data_directory: "{{ docker_home }}/prometheus"
 prometheus_port: 10090
+
+###
+### Alertmanager
+###
+alertmanager_available_externally: "false"
+alertmanager_data_directory: "{{ docker_home }}/alertmanager"
+alertmanager_port: 10093
