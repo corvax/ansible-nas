@@ -1,23 +1,23 @@
 ---
-- name: Create Prometheus Directory
+- name: Prometheus - Create Directory
   file:
     path: "{{ item }}"
     state: directory
   with_items:
     - "{{ prometheus_data_directory }}"
 
-- name: Copy Prometheus config file
+- name: Prometheus - Copy Config File
   template:
     src: prometheus/prometheus.yml
     dest: "{{ prometheus_data_directory }}/prometheus.yml"
 
-- name: Copy Prometheus alert rules
+- name: Prometheus - Copy Alert Rules
   when: (alertmanager_enabled | default(False)) and (prometheusnode_enabled | default(False))
   template:
     src: prometheus/alert.rules.yml
     dest: "{{ prometheus_data_directory }}/alert.rules.yml"
 
-- name: Prometheus Docker Container
+- name: Prometheus - Docker Container
   docker_container:
     name: prometheus
     image: prom/prometheus
@@ -27,6 +27,7 @@
     volumes:
       - "{{ prometheus_data_directory }}/prometheus.yml:/etc/prometheus/prometheus.yml:rw"
       - "{{ prometheus_data_directory }}/alert.rules.yml:/etc/prometheus/alert.rules.yml:rw"
+      - "{{ prometheus_data_directory }}/data:/prometheus:rw"
     restart_policy: unless-stopped
     labels:
       traefik.backend: "prometheus"
