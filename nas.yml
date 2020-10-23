@@ -253,16 +253,16 @@
     tags: pytivo
 
   - import_tasks: tasks/prometheus.yml
-     when: (prometheus_enabled | default(False))
-     tags: prometheus
+    when: (prometheus_enabled | default(False))
+    tags: prometheus
 
   - import_tasks: tasks/alertmanager.yml
     when: (alertmanager_enabled | default(False))
     tags: alertmanager
 
   - import_tasks: tasks/alertmanager-bot.yml
-     when: (alertmanagerbot_enabled | default(False))
-     tags: alertmanagerbot
+    when: (alertmanagerbot_enabled | default(False))
+    tags: alertmanagerbot
 
   - import_tasks: tasks/cadvisor.yml
     when: (cadvisor_enabled | default(False))
