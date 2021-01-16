@@ -18,9 +18,9 @@ By default, applications can be found on the ports listed below.
 | get_iplayer     | 8182   |              |
 | Gitea           | 3001   | Web          |
 | Gitea           | 222    | SSH          |
-| Gitlab          | 4080   | HTTP         |
-| Gitlab          | 4443   | HTTPS        |
-| Gitlab          | 422    | SSH          |
+| GitLab          | 4080   | HTTP         |
+| GitLab          | 4443   | HTTPS        |
+| GitLab          | 422    | SSH          |
 | Glances         | 61208  | SSH          |
 | Grafana         | 3000   |              |
 | Guacamole       | 8090   |              |
@@ -53,7 +53,6 @@ By default, applications can be found on the ports listed below.
 | PyTivo          | 9032   | HTTP         |
 | PyTivo          | 2190   | UDP          |
 | Radarr          | 7878   |              |
-| Serposcope      | 7134   |              |
 | Sickchill       | 8081   |              |
 | Sonarr          | 8989   |              |
 | Tautulli        | 8185   |              |

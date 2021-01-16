@@ -29,7 +29,6 @@ Ansible config and a bunch of Docker containers.
 * Content management with Joomla
 * A dual panel local file manager
 * Self-service media request web application
-* SEO tracking with Serposcope
 
 ### Available Applications
 
@@ -44,8 +43,8 @@ Ansible config and a bunch of Docker containers.
 * [Emby](https://emby.media/) - Media streaming and management
 * [Firefly III](https://firefly-iii.org/) - Free and open source personal finance manager
 * [get_iplayer](https://github.com/get-iplayer/get_iplayer) - download programmes from BBC iplayer
-* [Gitea](https://gitea.io/en-us/) - Simple self-hosted Github clone
-* [Gitlab](https://about.gitlab.com/features/) - Self-hosted Github clone of the highest order
+* [Gitea](https://gitea.io/en-us/) - Simple self-hosted GitHub clone
+* [GitLab](https://about.gitlab.com/features/) - Self-hosted GitHub clone of the highest order
 * [Glances](https://nicolargo.github.io/glances/) - for seeing the state of your system via a web browser
 * [Grafana](https://github.com/grafana/grafana) - Dashboarding tool
 * [Guacamole](https://guacamole.apache.org/) - Web based remote desktop gateway, supports VNC, RDP and SSH
@@ -73,7 +72,6 @@ Ansible config and a bunch of Docker containers.
 * [pyLoad](https://pyload.net/) - A download manager with a friendly web-interface
 * [PyTivo](http://pytivo.org) - An HMO and GoBack server for TiVos.
 * [Radarr](https://radarr.video/) - for organising and downloading movies
-* [Serposcope](https://serposcope.serphacker.com/en/) - tracker to monitor website ranking
 * [Sickchill](https://sickchill.github.io/) - for managing TV episodes
 * [Sonarr](https://sonarr.tv/) - for downloading and managing TV episodes
 * [Tautulli](http://tautulli.com/) - Monitor Your Plex Media Server
@@ -133,7 +131,7 @@ Assuming that your Ubuntu system disk is separate from your storage (it should b
 ## Requirements
 
 * Ansible NAS targets the latest Ubuntu LTS release, which is currently Ubuntu
-  Server 18.04.3 LTS.
+  Server 20.04 LTS.
 * You can run Ansible-NAS on whatever you like, read the docs for more info. I
   use an HP Microserver.
 
